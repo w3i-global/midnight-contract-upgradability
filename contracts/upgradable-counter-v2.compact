@@ -1,0 +1,25 @@
+pragma language_version >= 0.20;
+
+import CompactStandardLibrary;
+
+export ledger counter: Uint<64>;
+export ledger step: Uint<64>;
+
+constructor(initialCounter: Uint<64>, initialStep: Uint<64>) {
+    counter = disclose(initialCounter);
+    step = disclose(initialStep);
+}
+
+export circuit increment(): [] {
+    const bonus: Uint<64> = 1 as Uint<64>;
+    const next: Uint<64> = (counter + step + bonus) as Uint<64>;
+    counter = next;
+}
+
+export circuit getCounter(): Uint<64> {
+    return counter;
+}
+
+export circuit getStep(): Uint<64> {
+    return step;
+}
